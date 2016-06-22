@@ -26,13 +26,13 @@ module.exports = (grunt) ->
 
     watch:
       coffee:
-        files: ["./js/*.coffee"]
+        files: ["src/js/**/*.coffee"]
         tasks: ["compile:coffee"]
       haml:
-        files: ["./index.haml"]
+        files: ["src/**/*.haml"]
         tasks: ["compile:haml"]
       static:
-        files: ['./css/*']
+        files: ['src/css/*']
         tasks: ["compile:copy"]
 
     connect:
@@ -49,4 +49,4 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-connect'
 
   grunt.registerTask 'compile', ['coffee', 'haml', 'copy']
-  grunt.registerTask 'server', ['connect:server', 'watch']
+  grunt.registerTask 'server', ['compile','connect:server', 'watch']
