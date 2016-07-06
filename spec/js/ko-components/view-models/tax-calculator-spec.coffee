@@ -23,12 +23,24 @@ define 'tax-calculator-viewmodel-spec', ['knockout', 'jquery', 'jasmine-boot', '
         expect(viewModel.isTaxResident()).toEqual false
 
     describe 'tax', ->
-      it 'should return the correct value based on the income', ->
-        viewModel.salaryAmount 25000
-        expect(viewModel.tax()).toEqual 100
-        viewModel.salaryAmount 30000
-        expect(viewModel.tax()).toEqual 200
-        viewModel.salaryAmount 1000000
-        expect(viewModel.tax()).toEqual 178350
-        viewModel.salaryAmount 180000
-        expect(viewModel.tax()).toEqual 17350
+      describe 'if user is a tax resident', ->
+        beforeEach ->
+          spyOn(viewModel, 'isTaxResident').and.returnValue true
+
+        it 'should return the correct value based on the income', ->
+          viewModel.salaryAmount 25000
+          expect(viewModel.tax()).toEqual 100
+          viewModel.salaryAmount 30000
+          expect(viewModel.tax()).toEqual 200
+
+      describe 'if user is not a tax resident and stay between 61 to 182 days', ->
+        beforeEach ->
+          spyOn(viewModel, 'isTaxResident').and.returnValue false
+
+        it 'should return the correct value based on the income', ->
+          viewModel.salaryAmount 25000
+          expect(viewModel.tax()).toEqual 3750
+          viewModel.salaryAmount 30000
+          expect(viewModel.tax()).toEqual 4500
+          viewModel.salaryAmount 3000
+          expect(viewModel.tax()).toEqual 450
