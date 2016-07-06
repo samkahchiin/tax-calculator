@@ -1,0 +1,30 @@
+%div#tax-calculator
+  %h1 Singapore Tax Calculator
+  %p#description Singapore Tax Calculator is a free online tool to calculate your tax rate in Singapore
+  %form
+    .row#salary-container
+      .column-5
+        Salary Amount (in SGD)
+      .column-7
+        %input#salary-amount{ :type => 'number', 'data-bind': 'value: salaryAmount' }
+        / ko foreach: salaryPeriods
+        %input#salary-period{ type: 'radio', 'data-bind': 'checkedValue: $data.value, checked: $component.selectedSalaryPeriod' }
+        %label{ "data-bind": 'text: $data.name' }
+        / /ko
+    .row#residency-status-container
+      #nationality
+        %p.column-5
+          I am a Singaporean
+        .column-7
+          %input#tax-residency-status{ type: 'checkbox', 'data-bind': 'checked: isSingaporean' }
+      #work-period{ 'data-bind': 'visible: !isSingaporean() ' }
+        %p.column-5
+          I have worked in Singapore for more than 183 days
+        .column-7
+          %input#tax-residency-status{ type: 'checkbox', 'data-bind': 'checked: isWorkForLongEnoughTime' }
+  .row#tax-container
+    .column-5
+    %p.column-4 Total Estimated tax:
+    %p#tax.column-3
+      %span#amount{ 'data-bind': 'text: tax' }
+      %span{ 'data-bind': 'visible: tax' } SGD

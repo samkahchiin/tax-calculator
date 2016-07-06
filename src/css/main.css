@@ -1,0 +1,34 @@
+body{
+  font-family: 'Droid Sans', sans-serif;
+}
+
+#tax-calculator{
+  width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+
+#description{
+  margin-top:5px;
+  margin-bottom:5px;
+  font-style: italic;
+  color: grey;
+}
+
+form{
+  margin-top:20px;
+  background-color: #EEEEEE;
+  border-radius: 20px;
+  padding: 15px;
+}
+
+input{
+  border-radius:5px;
+}
+
+#tax-container{
+  font-weight: bold;
+  font-size: 20px;
+  text-align: right;
+}
