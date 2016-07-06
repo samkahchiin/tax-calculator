@@ -1,9 +1,0 @@
-%h1 Tax Calculator
-%form
-  .row
-    #salary-container.column-6
-      %div Salary Amount
-      / ko foreach: salaryRange
-      %input#salary{ type: 'radio', 'data-bind': 'checkedValue: $data.value, checked: $component.selectedSalaryRange' }
-      %label{ "data-bind": 'text: $data.name' }
-      / /ko
