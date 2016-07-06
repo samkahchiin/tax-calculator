@@ -1,1 +1,42 @@
-%h1 Tax Calculator
+%div#tax-calculator
+  %h1 Singapore Tax Calculator
+  %p#description Singapore Tax Calculator is a free online tool to calculate your tax rate in Singapore
+  %form
+    .row#salary-container{ 'data-bind': 'visible: isTaxResident && !isWorkForShortEnoughTime() ' }
+      .column-5
+        Salary Amount (in SGD)
+      .column-7
+        %input#salary-amount{ :type => 'number', 'data-bind': 'value: salaryAmount' }
+        / ko foreach: salaryPeriods
+        %input#salary-period{ type: 'radio', 'data-bind': 'checkedValue: $data.value, checked: $component.selectedSalaryPeriod' }
+        %label{ "data-bind": 'text: $data.name' }
+        / /ko
+    #residency-status-container
+      .row#nationality
+        .column-5
+          I am a Singaporean / Permanent Resident (PR)
+        .column-7
+          %input{ type: 'checkbox', 'data-bind': 'checked: isSingaporean' }
+      .row#work-period{ 'data-bind': 'visible: !isSingaporean() ' }
+        .column-5
+          I have worked in Singapore for more than 183 days
+        .column-7
+          %input{ type: 'checkbox', 'data-bind': 'checked: isWorkForLongEnoughTime' }
+      .row#work-period{ 'data-bind': 'visible: !isWorkForLongEnoughTime() ' }
+        .column-5
+          I have worked in Singapore for less than 61 days
+        .column-1
+          %input{ type: 'checkbox', 'data-bind': 'checked: isWorkForShortEnoughTime' }
+        %p.column-6{ 'data-bind': 'visible: isWorkForShortEnoughTime' }
+          Congratulations! You don't have to pay for tax if you work less than 61 days
+      .row{ 'data-bind': 'visible: !isTaxResident() && !isWorkForShortEnoughTime() ' }
+        .column-5
+          My total amount of salary (in SGD)
+        .column-7
+          %input#total-salary-amount{ :type => 'number', 'data-bind': 'value: salaryAmount' }
+  .row#tax-container
+    .column-5
+    %p.column-4 Total Estimated tax:
+    %p#tax.column-3
+      %span#amount{ 'data-bind': 'text: tax' }
+      %span{ 'data-bind': 'visible: tax' } SGD

@@ -8,11 +8,25 @@ module.exports = (grunt) ->
         src: ["**/*.coffee"]
         dest: 'build/js'
         ext: ".js"
+      spec:
+        expand: true
+        flatten: false
+        cwd: "spec/js"
+        src: ["**/*.coffee"]
+        dest: 'build/js'
+        ext: ".js"
     haml:
       dist:
         expand: true
         flatten: false
         cwd: 'src'
+        src: ['**/*.haml']
+        dest: 'build'
+        ext: '.html'
+      spec:
+        expand: true
+        flatten: false
+        cwd: 'spec'
         src: ['**/*.haml']
         dest: 'build'
         ext: '.html'
@@ -26,7 +40,7 @@ module.exports = (grunt) ->
 
     watch:
       coffee:
-        files: ["src/js/**/*.coffee"]
+        files: ["src/js/**/*.coffee","spec/js/**/*.coffee"]
         tasks: ["compile:coffee"]
       haml:
         files: ["src/**/*.haml"]
