@@ -4,7 +4,7 @@ define 'tax-calculator-viewmodel', ['knockout', 'lodash','tax-calculator-diction
     constructor: ->
       @salaryPeriods = ko.observableArray _.values TaxCalculator.Dictionary.SalaryPeriods
       @selectedSalaryPeriod = ko.observable TaxCalculator.Dictionary.SalaryPeriods.annually.value
-      @salaryAmount = ko.observable 0
+      @salary = ko.observable 0
       @isSingaporean = ko.observable true
       @isWorkForLongEnoughTime = ko.observable true
       @isWorkForShortEnoughTime = ko.observable ''
@@ -12,7 +12,7 @@ define 'tax-calculator-viewmodel', ['knockout', 'lodash','tax-calculator-diction
         @isSingaporean() || @isWorkForLongEnoughTime()
       @tax = ko.computed =>
         if @isTaxResident()
-          annualIncome = @salaryAmount() * @selectedSalaryPeriod()
+          annualIncome = @salary() * @selectedSalaryPeriod()
           switch
             when 20000 < annualIncome <= 30000
               tax = ( annualIncome - 20000 ) * 0.02
@@ -35,5 +35,5 @@ define 'tax-calculator-viewmodel', ['knockout', 'lodash','tax-calculator-diction
             when 320000 < annualIncome
               tax = 44550 + ( annualIncome - 320000 ) * 0.2
         else
-          tax = @salaryAmount() * 0.15
+          tax = @salary() * 0.15
         tax

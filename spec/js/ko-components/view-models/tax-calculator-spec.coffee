@@ -28,9 +28,9 @@ define 'tax-calculator-viewmodel-spec', ['knockout', 'jquery', 'jasmine-boot', '
           spyOn(viewModel, 'isTaxResident').and.returnValue true
 
         it 'should return the correct value based on the income', ->
-          viewModel.salaryAmount 25000
+          viewModel.salary 25000
           expect(viewModel.tax()).toEqual 100
-          viewModel.salaryAmount 30000
+          viewModel.salary 30000
           expect(viewModel.tax()).toEqual 200
 
       describe 'if user is not a tax resident and stay between 61 to 182 days', ->
@@ -38,9 +38,9 @@ define 'tax-calculator-viewmodel-spec', ['knockout', 'jquery', 'jasmine-boot', '
           spyOn(viewModel, 'isTaxResident').and.returnValue false
 
         it 'should return the correct value based on the income', ->
-          viewModel.salaryAmount 25000
+          viewModel.salary 25000
           expect(viewModel.tax()).toEqual 3750
-          viewModel.salaryAmount 30000
+          viewModel.salary 30000
           expect(viewModel.tax()).toEqual 4500
-          viewModel.salaryAmount 3000
+          viewModel.salary 3000
           expect(viewModel.tax()).toEqual 450

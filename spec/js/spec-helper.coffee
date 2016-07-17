@@ -6,6 +6,7 @@ require ['lib/config'], ->
       'jasmine-boot': "https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.4.1/boot.min"
       'jasmine-jquery': "lib/jasmine-jquery"
       'tax-calculator-viewmodel-spec': 'ko-components/view-models/tax-calculator-spec'
+      'tax-calculator-view-spec': 'ko-components/views/tax-calculator-spec'
     shim:
       # NOTE: These libraries need to be shimed.
       # They do not express their dependencies with 'define()'
@@ -17,6 +18,6 @@ require ['lib/config'], ->
         deps: ['jasmine-boot']
   }
 
-  require ['tax-calculator-viewmodel-spec'], () ->
+  require ['tax-calculator-viewmodel-spec','tax-calculator-view-spec'], () ->
     # need to load the windows for the spec to run
     window.onload()
