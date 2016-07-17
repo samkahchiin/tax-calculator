@@ -1,0 +1,65 @@
+<div id='tax-calculator'>
+  <h1>Singapore Tax Calculator</h1>
+  <p id='description'>Singapore Tax Calculator is a free online tool to calculate your tax rate in Singapore</p>
+  <form>
+    <div id='residency-status-container'>
+      <div class='row' id='nationality'>
+        <div class='column-5'>
+          I am a Singaporean / Permanent Resident (PR)
+        </div>
+        <div class='column-7'>
+          <input data-bind='checked: isSingaporean' type='checkbox'>
+        </div>
+      </div>
+      <div class='row' data-bind='visible: !isSingaporean() ' id='work-period'>
+        <div class='column-5'>
+          I have worked in Singapore for more than 183 days
+        </div>
+        <div class='column-7'>
+          <input data-bind='checked: isWorkForLongEnoughTime' type='checkbox'>
+        </div>
+      </div>
+      <div class='row' data-bind='visible: !isTaxResident() ' id='work-period'>
+        <div class='column-5'>
+          I have worked in Singapore for less than 61 days
+        </div>
+        <div class='column-1'>
+          <input data-bind='checked: isWorkForShortEnoughTime' type='checkbox'>
+        </div>
+        <p class='column-6' data-bind='visible: isWorkForShortEnoughTime'>
+          Congratulations! You don't have to pay for tax if you work less than 61 days
+        </p>
+      </div>
+    </div>
+    <div id='salary-container'>
+      <div class='row' data-bind='visible: isTaxResident'>
+        <div class='column-5'>
+          Salary Amount (in SGD)
+        </div>
+        <div class='column-7'>
+          <input data-bind='value: salary' id='salary-amount' type='number'>
+          <!-- ko foreach: salaryPeriods -->
+          <input data-bind='checkedValue: $data.value, checked: $component.selectedSalaryPeriod' id='salary-period' type='radio'>
+          <label data-bind='text: $data.name'></label>
+          <!-- /ko -->
+        </div>
+      </div>
+      <div class='row' data-bind='visible: !isTaxResident() &amp;&amp; !isWorkForShortEnoughTime() '>
+        <div class='column-5'>
+          My total amount of salary (in SGD)
+        </div>
+        <div class='column-7'>
+          <input data-bind='value: salary' id='total-salary-amount' type='number'>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class='row' id='tax-container'>
+    <div class='column-5'></div>
+    <p class='column-4'>Total Estimated tax:</p>
+    <p class='column-3' id='tax'>
+      <span data-bind='text: tax' id='amount'></span>
+      <span data-bind='visible: tax'>SGD</span>
+    </p>
+  </div>
+</div>
